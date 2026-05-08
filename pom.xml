@@ -12,9 +12,9 @@
 	</parent>
 
 	<groupId>br.com.sicredi</groupId>
-	<artifactId>biblioteca-sicredi-v3</artifactId>
-	<version>1.0.0</version>
-	<name>biblioteca-sicredi-v3</name>
+	<artifactId>biblioteca-sicredi</artifactId>
+	<version>1.0.1</version>
+	<name>biblioteca-sicredi</name>
 	<description>API REST para gerenciamento de biblioteca com MongoDB e Redis
 		embarcados</description>
 
