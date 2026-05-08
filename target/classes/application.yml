@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: biblioteca-sicredi
+
+  data:
+    mongodb:
+      database: biblioteca
+    redis:
+      host: localhost
+      port: 6379
+
+  cache:
+    type: redis
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    org.springframework.data.mongodb: INFO
+
+de:
+  flapdoodle:
+    mongodb:
+      embedded:
+        version: 7.0.14

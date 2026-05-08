@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DataLoader.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">biblioteca-sicredi-v3</a> &gt; <a href="index.source.html" class="el_package">br.com.sicredi.biblioteca.config</a> &gt; <span class="el_source">DataLoader.java</span></div><h1>DataLoader.java</h1><pre class="source lang-java linenums">package br.com.sicredi.biblioteca.config;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.index.Index;
+import org.springframework.stereotype.Component;
+
+import br.com.sicredi.biblioteca.entity.LivroEntity;
+import br.com.sicredi.biblioteca.enun.GeneroEnum;
+import br.com.sicredi.biblioteca.repository.LivroRepository;
+import lombok.RequiredArgsConstructor;
+
+@Component
+@RequiredArgsConstructor
+public class DataLoader implements CommandLineRunner {
+
+    private final LivroRepository repository;
+    private final MongoTemplate mongoTemplate;
+
+    @Override
+    public void run(String... args) {
+<span class="fc" id="L26">        mongoTemplate.indexOps(LivroEntity.class)</span>
+<span class="fc" id="L27">                .ensureIndex(new Index().on(&quot;isbn&quot;, Sort.Direction.ASC).unique());</span>
+
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (repository.count() &gt; 0) {</span>
+<span class="fc" id="L30">            return;</span>
+        }
+
+<span class="fc" id="L33">        LocalDateTime dateTime = LocalDateTime.now();</span>
+<span class="fc" id="L34">        repository.saveAll(List.of(</span>
+<span class="fc" id="L35">                LivroEntity.builder()</span>
+<span class="fc" id="L36">                        .titulo(&quot;Clean Architecture&quot;)</span>
+<span class="fc" id="L37">                        .autor(&quot;Robert C. Martin&quot;)</span>
+<span class="fc" id="L38">                        .isbn(&quot;9780134494166&quot;)</span>
+<span class="fc" id="L39">                        .anoPublicacao(2017)</span>
+<span class="fc" id="L40">                        .genero(GeneroEnum.TECNOLOGIA)</span>
+<span class="fc" id="L41">                        .disponivel(true)</span>
+<span class="fc" id="L42">                        .dataInclusao(dateTime)</span>
+<span class="fc" id="L43">                        .dataAtualizacao(dateTime)</span>
+<span class="fc" id="L44">                        .build(),</span>
+<span class="fc" id="L45">                LivroEntity.builder()</span>
+<span class="fc" id="L46">                        .titulo(&quot;O Hobbit&quot;)</span>
+<span class="fc" id="L47">                        .autor(&quot;J. R. R. Tolkien&quot;)</span>
+<span class="fc" id="L48">                        .isbn(&quot;9788595084742&quot;)</span>
+<span class="fc" id="L49">                        .anoPublicacao(1937)</span>
+<span class="fc" id="L50">                        .genero(GeneroEnum.FANTASIA)</span>
+<span class="fc" id="L51">                        .disponivel(true)</span>
+<span class="fc" id="L52">                        .dataInclusao(dateTime)</span>
+<span class="fc" id="L53">                        .dataAtualizacao(dateTime)</span>
+<span class="fc" id="L54">                        .build(),</span>
+<span class="fc" id="L55">                LivroEntity.builder()</span>
+<span class="fc" id="L56">                        .titulo(&quot;It: A Coisa&quot;)</span>
+<span class="fc" id="L57">                        .autor(&quot;Stephen King&quot;)</span>
+<span class="fc" id="L58">                        .isbn(&quot;9788560280940&quot;)</span>
+<span class="fc" id="L59">                        .anoPublicacao(1986)</span>
+<span class="fc" id="L60">                        .genero(GeneroEnum.TERROR)</span>
+<span class="fc" id="L61">                        .disponivel(false)</span>
+<span class="fc" id="L62">                        .dataInclusao(dateTime)</span>
+<span class="fc" id="L63">                        .dataAtualizacao(dateTime)</span>
+<span class="fc" id="L64">                        .build(),</span>
+<span class="fc" id="L65">                LivroEntity.builder()</span>
+<span class="fc" id="L66">                        .titulo(&quot;Dom Casmurro&quot;)</span>
+<span class="fc" id="L67">                        .autor(&quot;Machado de Assis&quot;)</span>
+<span class="fc" id="L68">                        .isbn(&quot;9788535913783&quot;)</span>
+<span class="fc" id="L69">                        .anoPublicacao(1899)</span>
+<span class="fc" id="L70">                        .genero(GeneroEnum.ROMANCE)</span>
+<span class="fc" id="L71">                        .disponivel(true)</span>
+<span class="fc" id="L72">                        .dataInclusao(dateTime)</span>
+<span class="fc" id="L73">                        .dataAtualizacao(dateTime)</span>
+<span class="fc" id="L74">                        .build()</span>
+        ));
+<span class="fc" id="L76">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

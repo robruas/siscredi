@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LivroMapperImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">biblioteca-sicredi-v3</a> &gt; <a href="index.source.html" class="el_package">br.com.sicredi.biblioteca.mapper</a> &gt; <span class="el_source">LivroMapperImpl.java</span></div><h1>LivroMapperImpl.java</h1><pre class="source lang-java linenums">package br.com.sicredi.biblioteca.mapper;
+
+import br.com.sicredi.biblioteca.dto.LivroRequest;
+import br.com.sicredi.biblioteca.dto.LivroResponse;
+import br.com.sicredi.biblioteca.entity.LivroEntity;
+import javax.annotation.processing.Generated;
+import org.springframework.stereotype.Component;
+
+@Generated(
+    value = &quot;org.mapstruct.ap.MappingProcessor&quot;,
+    date = &quot;2026-05-08T19:02:31-0300&quot;,
+    comments = &quot;version: 1.5.5.Final, compiler: javac, environment: Java 21.0.9 (Azul Systems, Inc.)&quot;
+)
+@Component
+<span class="fc" id="L15">public class LivroMapperImpl implements LivroMapper {</span>
+
+    @Override
+    public LivroEntity toEntity(LivroRequest request) {
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">        if ( request == null ) {</span>
+<span class="nc" id="L20">            return null;</span>
+        }
+
+<span class="fc" id="L23">        LivroEntity.LivroEntityBuilder livroEntity = LivroEntity.builder();</span>
+
+<span class="fc" id="L25">        livroEntity.titulo( request.titulo() );</span>
+<span class="fc" id="L26">        livroEntity.autor( request.autor() );</span>
+<span class="fc" id="L27">        livroEntity.isbn( request.isbn() );</span>
+<span class="fc" id="L28">        livroEntity.anoPublicacao( request.anoPublicacao() );</span>
+<span class="fc" id="L29">        livroEntity.genero( request.genero() );</span>
+<span class="fc" id="L30">        livroEntity.disponivel( request.disponivel() );</span>
+
+<span class="fc" id="L32">        return livroEntity.build();</span>
+    }
+
+    @Override
+    public LivroResponse toResponse(LivroEntity livro) {
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">        if ( livro == null ) {</span>
+<span class="nc" id="L38">            return null;</span>
+        }
+
+<span class="fc" id="L41">        LivroResponse livroResponse = new LivroResponse();</span>
+
+<span class="fc" id="L43">        livroResponse.setId( livro.getId() );</span>
+<span class="fc" id="L44">        livroResponse.setTitulo( livro.getTitulo() );</span>
+<span class="fc" id="L45">        livroResponse.setAutor( livro.getAutor() );</span>
+<span class="fc" id="L46">        livroResponse.setIsbn( livro.getIsbn() );</span>
+<span class="fc" id="L47">        livroResponse.setAnoPublicacao( livro.getAnoPublicacao() );</span>
+<span class="fc" id="L48">        livroResponse.setGenero( livro.getGenero() );</span>
+<span class="fc" id="L49">        livroResponse.setDisponivel( livro.getDisponivel() );</span>
+<span class="fc" id="L50">        livroResponse.setDataInclusao( livro.getDataInclusao() );</span>
+<span class="fc" id="L51">        livroResponse.setDataAtualizacao( livro.getDataAtualizacao() );</span>
+
+<span class="fc" id="L53">        return livroResponse;</span>
+    }
+
+    @Override
+    public void updateEntityFromRequest(LivroRequest request, LivroEntity entity) {
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if ( request == null ) {</span>
+<span class="nc" id="L59">            return;</span>
+        }
+
+<span class="fc" id="L62">        entity.setTitulo( request.titulo() );</span>
+<span class="fc" id="L63">        entity.setAutor( request.autor() );</span>
+<span class="fc" id="L64">        entity.setIsbn( request.isbn() );</span>
+<span class="fc" id="L65">        entity.setAnoPublicacao( request.anoPublicacao() );</span>
+<span class="fc" id="L66">        entity.setGenero( request.genero() );</span>
+<span class="fc" id="L67">        entity.setDisponivel( request.disponivel() );</span>
+<span class="fc" id="L68">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
