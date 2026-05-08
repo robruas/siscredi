@@ -1,40 +1,73 @@
-Biblioteca Sicredi - Gerenciamento de Livros
-API REST desenvolvida com Spring Boot para o gerenciamento de uma biblioteca, utilizando MongoDB como banco de dados principal e Redis para cache, ambos operando em modo embarcado para facilitar o desenvolvimento local.
+# 📚 Biblioteca Sicredi
 
-🚀 Tecnologias e Stack
-Java 21: Versão mais recente do JDK de suporte longo (LTS).
-Spring Boot 3.4.5: Framework base para construção da aplicação.
-Spring Data MongoDB: Abstração para persistência de dados no MongoDB.
-Spring Data Redis & Cache: Gerenciamento de cache para otimização de consultas.
-MongoDB Embarcado (Flapdoodle): Banco de dados NoSQL que sobe automaticamente com a aplicação.
-Redis Embarcado: Sistema de cache em memória que sobe automaticamente com a aplicação.
-SpringDoc OpenAPI (Swagger): Documentação interativa da API.
-Lombok & MapStruct: Redução de código boilerplate e mapeamento eficiente de DTOs.
-🛠️ Arquitetura e Organização
-A aplicação segue uma arquitetura em camadas bem definida:
+API REST para gerenciamento de biblioteca, focada em performance com **Redis Cache** e facilidade de setup com infraestrutura **embarcada**.
 
-Controller: @G:\Meu Drive\Desenvolvimento\dev\siscredi\src\main\java\br\com\sicredi\biblioteca\controller\LivroController.java:1-79 - Expõe os endpoints REST.
-Service: @G:\Meu Drive\Desenvolvimento\dev\siscredi\src\main\java\br\com\sicredi\biblioteca\service\impl\LivroServiceImpl.java:1-85 - Contém as regras de negócio e integração com cache.
-Repository: @G:\Meu Drive\Desenvolvimento\dev\siscredi\src\main\java\br\com\sicredi\biblioteca\repository\LivroRepository.java:1-12 - Interface de comunicação com o MongoDB.
-Config: Configurações de beans, cache e bancos de dados embarcados.
-⚡ Funcionalidades Principais
-CRUD de Livros: Cadastro, consulta, atualização e exclusão.
-Paginação e Filtros: Listagem de livros com suporte a paginação obrigatória e filtro opcional por gênero.
-Cache Inteligente:
-Consultas por ID são cacheadas no Redis.
-O cache é automaticamente invalidado em operações de atualização ou remoção.
-Carga de Dados Inicial: O @G:\Meu Drive\Desenvolvimento\dev\siscredi\src\main\java\br\com\sicredi\biblioteca\config\DataLoader.java:1-55 popula o banco com dados de exemplo ao iniciar.
-📋 Endpoints Principais
-Acesse a documentação completa via Swagger em: http://localhost:8080/swagger-ui.html
+---
 
-POST /livros: Cria um novo livro.
-GET /livros/{id}: Busca um livro por ID (com cache).
-GET /livros?pagina=0&tamanho=10&genero=TECNOLOGIA: Lista livros de forma paginada.
-PUT /livros/{id}: Atualiza um livro existente.
-DELETE /livros/{id}: Remove um livro.
-⚙️ Como Rodar
-Certifique-se de ter o Java 21 e Maven instalados.
-Clone o repositório ou extraia os arquivos.
-Importe como um projeto Maven em sua IDE (STS, IntelliJ, VS Code).
-Execute a classe principal: @G:\Meu Drive\Desenvolvimento\dev\siscredi\src\main\java\br\com\sicredi\biblioteca\BibliotecaApplication.java:1-15.
-Nota: Não é necessário ter MongoDB ou Redis instalados/rodando via Docker; a aplicação iniciará instâncias embarcadas automaticamente.
+## 🏗️ Arquitetura do Sistema
+
+Abaixo, o fluxo de dados e a integração entre os componentes:
+
+```mermaid
+graph TD
+    Client[Cliente / Swagger] --> Controller[LivroController]
+    Controller --> Service[LivroService]
+    
+    subgraph "Camada de Negócio & Persistência"
+        Service --> Cache{Redis Cache}
+        Service --> Repo[LivroRepository]
+        Repo --> MongoDB[(MongoDB Embedded)]
+        Cache --> Redis[(Redis Embedded)]
+    end
+
+    subgraph "Inicialização"
+        DataLoader --> MongoDB
+    end
+```
+
+---
+
+## 🚀 Tecnologias e Stack
+
+- **Linguagem:** Java 21
+- **Framework:** Spring Boot 3.4.5
+- **Dados:** MongoDB (Persistência) & Redis (Cache)
+- **Infra:** Bases embarcadas (roda sem Docker/Instalação local)
+- **Docs:** SpringDoc OpenAPI (Swagger)
+- **Produtividade:** Lombok & MapStruct
+
+---
+
+## ⚡ Funcionalidades
+
+- **CRUD Completo:** Gerenciamento de livros com validações.
+- **Cache-Aside Pattern:**
+  - `GET /{id}`: Busca no Redis antes do MongoDB.
+  - `PUT`/`DELETE`: Invalidação automática do cache.
+- **Listagem Otimizada:** Paginação obrigatória para evitar sobrecarga.
+- **Carga Inicial:** Dados pré-populados ao iniciar a aplicação.
+
+---
+
+## 📋 Interface da API
+
+| Método | Endpoint | Descrição |
+| :--- | :--- | :--- |
+| `POST` | `/livros` | Cadastra novo livro |
+| `GET` | `/livros/{id}` | Detalhes (com cache) |
+| `GET` | `/livros` | Lista paginada |
+| `PUT` | `/livros/{id}` | Atualiza dados |
+| `DELETE` | `/livros/{id}` | Remove registro |
+
+> **Documentação Interativa:** [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+
+---
+
+## ⚙️ Como Executar
+
+1. **Requisitos:** JDK 21 e Maven.
+2. **Setup:** Importe o projeto na sua IDE (STS, IntelliJ, VS Code).
+3. **Execução:** Rode a classe `BibliotecaApplication`.
+4. **Pronto:** Os bancos subirão automaticamente junto com o Spring.
+
+---
