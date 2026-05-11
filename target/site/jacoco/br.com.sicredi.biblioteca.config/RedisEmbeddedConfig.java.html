@@ -4,25 +4,27 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import jakarta.annotation.PreDestroy;
+import org.springframework.context.annotation.Profile;
 import redis.embedded.RedisServer;
 
 @Configuration
-<span class="fc" id="L10">public class RedisEmbeddedConfig {</span>
+@Profile(&quot;!test&quot;)
+<span class="fc" id="L12">public class RedisEmbeddedConfig {</span>
 
     private RedisServer redisServer;
 
     @Bean
     RedisServer redisServer() throws Exception {
-<span class="nc" id="L16">        redisServer = new RedisServer(6379);</span>
-<span class="nc" id="L17">        redisServer.start();</span>
-<span class="nc" id="L18">        return redisServer;</span>
+<span class="nc" id="L18">        redisServer = new RedisServer(6379);</span>
+<span class="nc" id="L19">        redisServer.start();</span>
+<span class="nc" id="L20">        return redisServer;</span>
     }
 
     @PreDestroy
     public void stopRedis() {
-<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if (redisServer != null) {</span>
-<span class="nc" id="L24">            redisServer.stop();</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if (redisServer != null) {</span>
+<span class="nc" id="L26">            redisServer.stop();</span>
         }
-<span class="fc" id="L26">    }</span>
+<span class="fc" id="L28">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -5,10 +5,12 @@ br\com\sicredi\biblioteca\service\LivroServiceTest$Atualizar.class
 br\com\sicredi\biblioteca\service\LivroServiceTest$Criar.class
 br\com\sicredi\biblioteca\dto\ErroResponseTest.class
 br\com\sicredi\biblioteca\mapper\LivroMapperTest.class
+br\com\sicredi\biblioteca\controller\LivroControllerIT.class
 br\com\sicredi\biblioteca\service\LivroServiceTest$Buscar.class
 br\com\sicredi\biblioteca\service\LivroServiceTest$Remover.class
 br\com\sicredi\biblioteca\config\RedisEmbeddedConfigTest.class
 br\com\sicredi\biblioteca\config\DataLoaderTest.class
 br\com\sicredi\biblioteca\service\LivroServiceTest.class
 br\com\sicredi\biblioteca\controller\LivroControllerTest.class
+br\com\sicredi\biblioteca\controller\LivroControllerIT$DesabilitarRedisEmbeddedNosTestes.class
 br\com\sicredi\biblioteca\dto\LivroResponseTest.class

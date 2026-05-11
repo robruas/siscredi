@@ -4,9 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import jakarta.annotation.PreDestroy;
+import org.springframework.context.annotation.Profile;
 import redis.embedded.RedisServer;
 
 @Configuration
+@Profile("!test")
 public class RedisEmbeddedConfig {
 
     private RedisServer redisServer;
